@@ -24,6 +24,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { AreasComponent } from './pages/areas/areas.component';
 import { PersonasComponent } from './pages/personas/personas.component';
 import { ActivosComponent } from './pages/activos/activos.component';
+import { DetalleActivoComponent } from './pages/activos/detalle-activo/detalle-activo.component';
 import { ActivosFijosService } from './service/activos-fijos.service';
 import { AreasService } from './service/areas.service';
 import { PersonasService } from './service/personas.service';
@@ -36,6 +37,8 @@ const routes: Routes = [
   { path: 'areas', component: AreasComponent },
   { path: 'personas', component: PersonasComponent, canActivate: [AuthGuard, RoleGuard], data: [{ role: 'ROLE_USER' }, { role: 'ROLE_ADMIN' }] },
   { path: 'activosFijos', component: ActivosComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
+  { path: 'activosFijos/form', component: DetalleActivoComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },  
+  { path: 'activosFijos/form/:id', component: DetalleActivoComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
   { path: 'login', component: LoginComponent },
 ];
 
@@ -47,7 +50,8 @@ const routes: Routes = [
     LoginComponent,
     AreasComponent,
     PersonasComponent,
-    ActivosComponent
+    ActivosComponent,
+    DetalleActivoComponent
   ],
   imports: [
     BrowserModule,

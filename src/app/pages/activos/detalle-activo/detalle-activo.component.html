@@ -1,0 +1,65 @@
+<ul class="alert alert-danger" *ngIf="errores?.length > 0">
+  <li *ngFor="let err of errores">
+    {{ err }}
+  </li>
+</ul>
+
+<div class="card bg-dark text-white">
+  <div class="card-header">{{ titulo }}</div>
+  <div class="card-body">
+
+    <form #activoFijoForm="ngForm">
+      <div class="form-group row">
+        <label for="nombre" class="col-form-label col-sm-2">Nombre</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="activoFijo.nombre" name="nombre" #nombre="ngModel"
+            required minlength="4"> <!-- required minlength="4" -->
+          <div class="alert alert-danger" *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)">
+            <div *ngIf="nombre.errors.required">
+              Nombre es requerido
+            </div>
+            <div *ngIf="nombre.errors.minlength">
+              Nombre debe tener al menos 4 caracteres
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="descripcion" class="col-form-label col-sm-2">Descripcion</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="activoFijo.descripcion" name="descripcion"
+            #descripcion="ngModel">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="estado" class="col-form-label col-sm-2">Estado</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" [(ngModel)]="activoFijo.estado" name="estado" #estado="ngModel"
+            required minlength="4">
+          <div class="alert alert-danger" *ngIf="estado.invalid && (estado.dirty || estado.touched)">
+            <div *ngIf="estado.errors.required">
+              Estado es requerido
+            </div>
+            <div *ngIf="estado.errors.minlength">
+              Estado debe tener al menos 4 caracteres
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="col-sm-6">
+          <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!activoFijo.id else elseBlock"
+            [disabled]="!activoFijoForm.form.valid">Crear</button>
+
+          <ng-template #elseBlock>
+            <button class="btn btn-primary" role="button" (click)='update()'
+              [disabled]="!activoFijoForm.form.valid">Editar</button>
+          </ng-template>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

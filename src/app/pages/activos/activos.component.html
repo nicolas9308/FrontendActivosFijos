@@ -1,30 +1,42 @@
 <div class="card border-primary mb-3">
-  <div class="card-header">Activos Fijos</div>
+  <div class="card-header">Tipos de Activos Fijos</div>
   <div class="card-body text-primary">
-    <h5 class="card-title">Listado de Activos</h5>
-    <div *ngIf="personas?.length == 0" class="alert alert-info">
+    <h5 class="card-title">Listado de Tipos de Activos</h5>
+    <div class="my-2 text-left">
+        <button *ngIf="authService.hasRole('ROLE_ADMIN')" class="btn btn-rounded btn-primary" type="button"
+          [routerLink]="['/activosFijos/form']">
+          Crear Tipo de Activo
+        </button>
+      </div>
+    <div *ngIf="activosFijos?.length == 0" class="alert alert-info">
       No hay registros en la base de datos!
     </div>
-    <table class="table table-bordered table-striped" *ngIf="personas?.length>0">
+    <table class="table table-bordered table-striped" *ngIf="activosFijos?.length>0">
       <thead>
         <tr>
-          <th *ngIf="authService.hasRole('ROLE_USER')">#</th>
-          <th>nombre</th>
-          <th>cargo</th>
-          <th>identificacion</th>
-          <th>telefono</th>
-          <th>email</th>
-          <th>estado</th>
+          <th>Id</th>
+          <th>Nombre</th>
+          <th>Descripcion</th>
+          <th>Estado</th>
+          <th *ngIf="authService.hasRole('ROLE_ADMIN')">Editar</th>
+          <th *ngIf="authService.hasRole('ROLE_ADMIN')">Eliminar</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let persona of personas">
-          <td>{{ persona.nombre }}</td>
-          <td>{{ persona.cargo | uppercase }}</td>
-          <td>{{ persona.identificacion }}</td>
-          <td>{{ persona.telefono }}</td>
-          <td>{{ persona.email }}</td>
-          <td>{{ persona.estado }}</td>
+        <tr *ngFor="let activoFijo of activosFijos">
+          <td>{{ activoFijo.id}}</td>
+          <td>{{ activoFijo.nombre }}</td>
+          <td *ngIf="activoFijo.descripcion != null">{{ activoFijo.descripcion }}</td>
+          <td *ngIf="activoFijo.descripcion == null">No contiene descripcion</td>
+          <td>{{ activoFijo.estado }}</td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+            <button type="button" name="editar" [routerLink]="['/activosFijos/form', activoFijo.id]"
+              class="btn btn-primary btn-sm">Editar</button>
+          </td>
+          <td *ngIf="authService.hasRole('ROLE_ADMIN')">
+            <button type="button" name="eliminar" (click)='delete(activoFijo)'
+              class="btn btn-danger btn-sm">Eliminar</button>
+          </td>
         </tr>
       </tbody>
     </table>
