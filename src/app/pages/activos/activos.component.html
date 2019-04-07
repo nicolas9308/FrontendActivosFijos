@@ -1,0 +1,32 @@
+<div class="card border-primary mb-3">
+  <div class="card-header">Activos Fijos</div>
+  <div class="card-body text-primary">
+    <h5 class="card-title">Listado de Activos</h5>
+    <div *ngIf="personas?.length == 0" class="alert alert-info">
+      No hay registros en la base de datos!
+    </div>
+    <table class="table table-bordered table-striped" *ngIf="personas?.length>0">
+      <thead>
+        <tr>
+          <th *ngIf="authService.hasRole('ROLE_USER')">#</th>
+          <th>nombre</th>
+          <th>cargo</th>
+          <th>identificacion</th>
+          <th>telefono</th>
+          <th>email</th>
+          <th>estado</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let persona of personas">
+          <td>{{ persona.nombre }}</td>
+          <td>{{ persona.cargo | uppercase }}</td>
+          <td>{{ persona.identificacion }}</td>
+          <td>{{ persona.telefono }}</td>
+          <td>{{ persona.email }}</td>
+          <td>{{ persona.estado }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
