@@ -35,7 +35,7 @@ registerLocaleData(localeES, 'es');
 const routes: Routes = [
   { path: '', redirectTo: '/areas', pathMatch: 'full' },
   { path: 'areas', component: AreasComponent },
-  { path: 'personas', component: PersonasComponent, canActivate: [AuthGuard, RoleGuard], data: [{ role: 'ROLE_USER' }, { role: 'ROLE_ADMIN' }] },
+  { path: 'personas', component: PersonasComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_USER' } },
   { path: 'activosFijos', component: ActivosComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },
   { path: 'activosFijos/form', component: DetalleActivoComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },  
   { path: 'activosFijos/form/:id', component: DetalleActivoComponent, canActivate: [AuthGuard, RoleGuard], data: { role: 'ROLE_ADMIN' } },

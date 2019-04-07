@@ -8,7 +8,7 @@
     <table class="table table-bordered table-striped" *ngIf="personas?.length>0">
       <thead>
         <tr>
-          <th *ngIf="authService.hasRole('ROLE_USER')">#</th>
+          <th>#</th>
           <th>nombre</th>
           <th>cargo</th>
           <th>identificacion</th>
@@ -19,6 +19,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let persona of personas">
+          <td>{{ persona.id }}</td>
           <td>{{ persona.nombre }}</td>
           <td>{{ persona.cargo | uppercase }}</td>
           <td>{{ persona.identificacion }}</td>
