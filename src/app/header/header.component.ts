@@ -8,7 +8,7 @@ import swal from 'sweetalert2';
   templateUrl: './header.component.html'
 })
 export class HeaderComponent {
-  title: string = 'Grupo ASD'
+  title: string = 'Prueba'
 
   constructor(public authService: AuthService, private router: Router) { }
   logout(): void {
